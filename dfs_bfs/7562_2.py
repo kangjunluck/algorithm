@@ -37,4 +37,3 @@ for i in range(case):
         board[a][b] = 1
         board[x][y] = -2
         print(dfs(a, b))
-
