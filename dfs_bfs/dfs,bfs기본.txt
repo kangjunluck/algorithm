@@ -1,0 +1,43 @@
+import sys
+
+def dfs(i) :
+    if visited[i] : return
+    visited[i]=True
+    ans.append(i)
+    for j in graph[i] :
+        dfs(j)
+
+
+
+n, m, v = map(int, sys.stdin.readline().split())
+graph = [[] for _ in range(n+1)]
+
+for _ in range(m) :
+    a,b = map(int,  sys.stdin.readline().split())
+    graph[a].append(b)
+    graph[b].append(a)
+
+visited = [0]*(n+1)
+
+for a in graph :
+    a.sort()
+ans=[]
+
+
+
+dfs(v)
+print(*ans)
+
+ans=[]
+visited = [False for _ in range(n+1)]
+
+que = [v]
+while que :
+    next = que.pop()
+    if visited[next] : continue
+    visited[next]=True
+    ans.append(next)
+    for i in graph[next] :
+        que = [i]+que
+
+print(' '.join(map(str,ans)))
