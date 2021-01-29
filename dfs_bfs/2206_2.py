@@ -17,25 +17,27 @@ dr = [0, 0, 1, -1]
 result = []
 
 q = deque()
-q.append((0, 0, 0, 0))
+q.append((0, 0, 0, 1))
 board[0][0]=2
 ans = 0
+visited = [[0 for _ in range(m)] for __ in range(n)]
 while q:
-    now = q.popleft()
-    
+    x, y, cnt, boom = q.popleft()
+    if x == n-1 and y == m-1:
+        ans = cnt + 1
+        break
     for arrow in range(4):
-        nextC = now[0] + dc[arrow]
-        nextR = now[1] + dr[arrow]
-        if nextC == n-1 and nextR == m-1:
-            ans = now[2] + 2
-            break
-        elif 0<=nextC<n and 0<=nextR<m:
-            if now[3]==0 and board[nextC][nextR] == 1:
-                board[nextC][nextR] = 2
-                q.append((nextC, nextR, now[2]+1, 1))
-            elif board[nextC][nextR] == 0:
-                board[nextC][nextR] = 2
-                q.append((nextC, nextR, now[2]+1, now[3]))
+        nextC = x + dc[arrow]
+        nextR = y + dr[arrow]
+        
+        if 0<=nextC<n and 0<=nextR<m:
+            if board[nextC][nextR] == 0:
+                if not visited[nextC][nextR] or visited[nextC][nextR] > boom:
+                    visited[nextC][nextR] = boom
+                    q.append((nextC, nextR, cnt+1, boom))
+            elif boom == 1:
+                visited[nextC][nextR] = boom + 1
+                q. append((nextC, nextR, cnt+1, boom + 1))
             else:
                 pass
         else:
@@ -45,8 +47,48 @@ if ans ==0:
     print(-1)
 else:
     print(ans)
-# if len(result) == result.count(0):
-#     print(-1)
-# else:
-#     change_list = [re for re in result if re > 0]
-#     print(min(change_list))
+
+
+
+
+
+#########################################
+# import sys
+# from collections import deque
+
+# input = sys.stdin.readline
+
+# n, m = map(int, input().split())
+# board = []
+
+# for i in range(n) :
+#     board.append(list(map(int, input().strip())))
+    
+# visited = [[0 for _ in range(m)] for _ in range(n)]
+
+# dr = 0, 1, 0, -1
+# dc = 1, 0, -1, 0
+
+# que = deque()
+# que.append((0,0,1,1))
+# visited[0][0]=1
+# finish = False
+
+# while que :
+#     r, c, boom, count = que.popleft()
+#     if r==n-1 and c==m-1 : 
+#         finish=True
+#         break
+#     for i in range(4) :
+#         nr, nc = r+dr[i], c+dc[i]
+#         if 0<=nr<n and 0<=nc<m :
+#             if board[nr][nc]==0 :
+#                 if not visited[nr][nc] or visited[nr][nc]>boom :
+#                     visited[nr][nc]=boom
+#                     que.append((nr, nc, boom, count+1))
+#             elif boom==1 :
+#                 visited[nr][nc]=boom+1
+#                 que.append((nr, nc, boom+1, count+1))
+
+# if finish : print(count)
+# else : print(-1)
