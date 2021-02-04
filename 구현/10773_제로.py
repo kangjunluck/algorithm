@@ -10,9 +10,8 @@ number = []
 for case in range(n):
     num = int(input())
     if num == 0:
-        number.remove(number[-1])
+        number.pop()
     else:
         number.append(num)
-    print(number)
 
 print(sum(number))
