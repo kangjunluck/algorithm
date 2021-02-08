@@ -28,16 +28,14 @@ for _ in range(m) :
 
 visited = [0]*(n+1)   # 도착한적 있는지 없는지 확인을 위한
 
-print(visited)
 
 for a in graph :
     a.sort()
 ans=[]
-print(graph)
-
 
 dfs(v)
-print(ans)
+
+print(' '.join(map(str,ans)))
 
 ans=[]
 visited = [False for _ in range(n+1)]
@@ -51,6 +49,5 @@ while que :
     for i in graph[next] :
         que = [i]+que
 
-print(ans)
 
-# print(' '.join(map(str,ans)))
+print(' '.join(map(str,ans)))
