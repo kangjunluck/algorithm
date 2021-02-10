@@ -20,7 +20,7 @@ while q:
     now = q.popleft()
     point, cnt = now[0], now[1]
     if cnt == -1:
-        result -= 1
+        result = result - len(q) - 1
         break
     else:
         for i in board[point]:
@@ -30,5 +30,6 @@ while q:
                 q.append((i, cnt-1))
                 visited[i] = 1
                 result += 1
+                
 
 print(result)
