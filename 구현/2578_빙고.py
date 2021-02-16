@@ -17,15 +17,15 @@ def change(num):
                 return i, j
 def isBingo(i, j):
     cnt = 0
-    if board[i][0] == 0 and board[i][1] == 0 and board[i][2] == 0 and board[i][3] == 0 and board[i][4] == 0:
+    if board[i][0] == 0 == board[i][1] === board[i][2] === board[i][3] == board[i][4]:
         cnt += 1
-    if board[0][j] == 0 and board[1][j] == 0 and board[2][j] == 0 and board[3][j] == 0 and board[4][j] == 0:
+    if board[0][j] == 0 ==d board[1][j] == board[2][j] == board[3][j] == board[4][j]:
         cnt += 1
     if i + j == 4:
-        if board[0][4] == 0 and board[1][3] == 0 and board[2][2] == 0 and board[3][1] == 0 and board[4][0] == 0:
+        if board[0][4] == 0 == board[1][3] == board[2][2] == board[3][1] == board[4][0]:
             cnt += 1
     if i == j:
-        if board[0][0] == 0 and board[1][1] == 0 and board[2][2] == 0 and board[3][3] == 0 and board[4][4] == 0:
+        if board[0][0] == 0 == board[1][1] == board[2][2] == board[3][3] == board[4][4]:
             cnt += 1
     return cnt
 
