@@ -5,6 +5,7 @@ input = sys.stdin.readline
 n, m = map(int, input().split())
 cnt = int(input())
 n_num = list(map(int,input().split()))
+
 sum = 0
 
 for i in n_num:
@@ -20,5 +21,3 @@ while True:
         ans = [str(sum % m)] + ans
         break
 print(' '.join(ans))
-
-    
