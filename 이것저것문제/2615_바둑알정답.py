@@ -1,192 +1,78 @@
-# 어려운걸~ 못풀었으
 import sys
-
 
 input = sys.stdin.readline
 
-h = 19
 board = []
-for _ in range(h):
-    board.append(list(map(int,input().split())))
-visited = [[0 for __ in range(h)] for ___ in range(h)]
+for _ in range(19):
+    board.append(list(map(int, input().split())))
+
+finish = False
+row, col = -1, -1
+for i in range(19):  # 가로 탐색
+    count = 1
+    for j in range(18):
+        if board[i][j]!=0 and board[i][j]==board[i][j+1]:
+            count+=1
+            if count==5 and (j==17 or board[i][j+1]!=board[i][j+2]):
+                finish = True
+                row, col = i+1, j-2
+                break
+        else: count=1
+    if finish: break
+
+for i in range(19):  # 세로 탐색
+    count = 1
+    for j in range(18):
+        if board[j][i]!=0 and board[j][i]==board[j+1][i]:
+            count+=1
+            if count==5 and (j==17 or board[j+1][i]!=board[j+2][i]):
+                finish = True
+                row, col = j-2, i+1
+                break
+        else: count=1
+    if finish: break
+
+r, c = 18, 0
+while r!=0 or c!=18:  # 오른쪽 아래 대각선 탐색
+    rr, cc = r, c
+    count = 1
+    while rr!=18 and cc!=18:
+        if board[rr][cc]!=0 and board[rr][cc]==board[rr+1][cc+1]:
+            count+=1
+            if count==5 and (rr==17 or cc==17 or board[rr+1][cc+1]!=board[rr+2][cc+2]):
+                finish = True
+                row, col = rr-2, cc-2
+                break
+        else : count=1
+        rr+=1
+        cc+=1
+    if r>0: r-=1
+    else: c+=1
+    if finish: break
+
+r, c = 18, 18
+while r!=0 or c!=0:  # 왼쪽 아래 대각선 탐색
+    rr, cc = r, c
+    count = 1
+    while rr!=18 and cc!=0:
+        if board[rr][cc]!=0 and board[rr][cc]==board[rr+1][cc-1]:
+            count+=1
+            if count==5 and (rr==17 or cc==1 or board[rr+1][cc-1]!=board[rr+2][cc-2]):
+                finish = True
+                row, col = rr+2, cc
+                break
+        else : count=1
+        rr+=1
+        cc-=1
+    if r>0: r-=1
+    else: c-=1
+    if finish: break
 
 
-dc = [1, 1, 1, -1, -1, -1, 0, 0]
-dr = [1, 0, -1, 1, 0, -1, -1, 1]
-
-def dfs(i, j, color, std = 0, cnt = 0):
-    print(i, j, std, cnt)
-    if cnt == 4:
-        if std == 'ru':
-            nextC = i +dc[0]
-            nextR = j +dr[0]
-            if 0<=nextC<h and 0<=nextR<h and visited[nextC][nextR] == 0 and board[nextC][nextR] == color:
-                return False
-            else:
-                return True
-        elif std == 'u':
-            nextC = i +dc[1]
-            nextR = j +dr[1]
-            if 0<=nextC<h and 0<=nextR<h and visited[nextC][nextR] == 0 and board[nextC][nextR] == color:
-                return False
-            else:
-                return True
-        elif std == 'lu':
-            nextC = i +dc[2]
-            nextR = j +dr[2]
-            if 0<=nextC<h and 0<=nextR<h and visited[nextC][nextR] == 0 and board[nextC][nextR] == color:
-                return False
-            else:
-                return True
-        elif std == 'rd':
-            nextC = i +dc[3]
-            nextR = j +dr[3]
-            if 0<=nextC<h and 0<=nextR<h and visited[nextC][nextR] == 0 and board[nextC][nextR] == color:
-                return False
-            else:
-                return True
-        elif std == 'd':
-            nextC = i +dc[4]
-            nextR = j +dr[4]
-            if 0<=nextC<h and 0<=nextR<h and visited[nextC][nextR] == 0 and board[nextC][nextR] == color:
-                return False
-            else:
-                return True
-        elif std == 'ld':
-            nextC = i +dc[5]
-            nextR = j +dr[5]
-            if 0<=nextC<h and 0<=nextR<h and visited[nextC][nextR] == 0 and board[nextC][nextR] == color:
-                return False
-            else:
-                return True
-        elif std == 'l':
-            nextC = i +dc[6]
-            nextR = j +dr[6]
-            if 0<=nextC<h and 0<=nextR<h and visited[nextC][nextR] == 0 and board[nextC][nextR] == color:
-                return False
-            else:
-                return True
-        elif std == 'r':
-            nextC = i +dc[7]
-            nextR = j +dr[7]
-            if 0<=nextC<h and 0<=nextR<h and visited[nextC][nextR] == 0 and board[nextC][nextR] == color:
-                return False
-            else:
-                return True
-    if std == 0:
-        for step in range(8):
-            nextC = i + dc[step]
-            nextR = j + dr[step]
-            if 0<=nextC<h and 0<=nextR<h and visited[nextC][nextR] == 0 and board[nextC][nextR] == color:
-                
-                if step == 0:
-                    if dfs(nextC, nextR, color, std ='ru', cnt = cnt+1):
-                        set_list.append((nextC, nextR))
-                        return True
-                elif step == 1:
-                    if dfs(nextC, nextR, color, std ='u', cnt = cnt+1):
-                        set_list.append((nextC, nextR))
-                        return True
-                elif step == 2:
-                    if dfs(nextC, nextR, color, std ='lu', cnt = cnt+1):
-                        set_list.append((nextC, nextR))
-                        return True
-                elif step == 3:
-                    if dfs(nextC, nextR, color, std ='rd', cnt = cnt+1):
-                        set_list.append((nextC, nextR))
-                        return True
-                elif step == 4:
-                    if dfs(nextC, nextR, color, std ='d', cnt = cnt+1):
-                        set_list.append((nextC, nextR))
-                        return True
-                elif step == 5:
-                    if dfs(nextC, nextR, color, std ='ld', cnt = cnt+1):
-                        set_list.append((nextC, nextR))
-                        return True
-                elif step == 6:
-                    if dfs(nextC, nextR, color, std ='l', cnt = cnt+1):
-                        set_list.append((nextC, nextR))
-                        return True
-                elif step == 7:
-                    if dfs(nextC, nextR, color, std ='r', cnt = cnt+1):
-                        set_list.append((nextC, nextR))
-                        return True
-    elif std == 'ru':
-        nextC = i +dc[0]
-        nextR = j +dr[0]
-        if 0<=nextC<h and 0<=nextR<h and visited[nextC][nextR] == 0 and board[nextC][nextR] == color:
-            if dfs(nextC, nextR, color, std ='ru', cnt = cnt+1):
-                        set_list.append((nextC, nextR))
-                        return True
-
-    elif std == 'u':
-        nextC = i +dc[1]
-        nextR = j +dr[1]
-        if 0<=nextC<h and 0<=nextR<h and visited[nextC][nextR] == 0 and board[nextC][nextR] == color:
-            if dfs(nextC, nextR, color, std ='u', cnt = cnt+1):
-                        set_list.append((nextC, nextR))
-                        return True
-    elif std == 'lu':
-        nextC = i +dc[2]
-        nextR = j +dr[2]
-        if 0<=nextC<h and 0<=nextR<h and visited[nextC][nextR] == 0 and board[nextC][nextR] == color:
-            if dfs(nextC, nextR, color, std ='lu', cnt = cnt+1):
-                        set_list.append((nextC, nextR))
-                        return True
-    elif std == 'rd':
-        nextC = i +dc[3]
-        nextR = j +dr[3]
-        if 0<=nextC<h and 0<=nextR<h and visited[nextC][nextR] == 0 and board[nextC][nextR] == color:
-            if dfs(nextC, nextR, color, std ='rd', cnt = cnt+1):
-                        set_list.append((nextC, nextR))
-                        return True
-    elif std == 'd':
-        nextC = i +dc[4]
-        nextR = j +dr[4]
-        if 0<=nextC<h and 0<=nextR<h and visited[nextC][nextR] == 0 and board[nextC][nextR] == color:
-            if dfs(nextC, nextR, color, std ='d', cnt = cnt+1):
-                        set_list.append((nextC, nextR))
-                        return True
-    elif std == 'ld':
-        nextC = i +dc[5]
-        nextR = j +dr[5]
-        if 0<=nextC<h and 0<=nextR<h and visited[nextC][nextR] == 0 and board[nextC][nextR] == color:
-            if dfs(nextC, nextR, color, std ='ld', cnt = cnt+1):
-                        set_list.append((nextC, nextR))
-                        return True
-    elif std == 'l':
-        nextC = i +dc[6]
-        nextR = j +dr[6]
-        if 0<=nextC<h and 0<=nextR<h and visited[nextC][nextR] == 0 and board[nextC][nextR] == color:
-            if dfs(nextC, nextR, color, std ='l', cnt = cnt+1):
-                        set_list.append((nextC, nextR))
-                        return True
-    elif std == 'r':
-        nextC = i +dc[7]
-        nextR = j +dr[7]
-        if 0<=nextC<h and 0<=nextR<h and visited[nextC][nextR] == 0 and board[nextC][nextR] == color:
-            if dfs(nextC, nextR, color, std ='r', cnt = cnt+1):
-                        set_list.append((nextC, nextR))
-                        return True
-
-start_list = []
-for i in range(h):
-    for j in range(h):
-        if board[i][j] == 1:
-            start_list.append((i,j,1))
-        elif board[i][j] == 2:
-            start_list.append((i,j,2))
-ans = []
-for part in start_list:
-    set_list = []
-    x, y, color = part[0], part[1], part[2]
-    visited[x][y] = 1
-    if dfs(x,y,color):
-        set_list.append((x,y))
-        sort_list = sorted(set_list, key= lambda x:(x[1],x[0]))
-        ans.append(sort_list[0])
-if ans:
-    print(color)
-    print(ans[0][0]+1, ans[0][1]+1)
+if row==-1: print(0)
+elif board[row-1][col-1]==1:
+    print(1)
+    print(row, col)
 else:
-    print(0)
+    print(2)
+    print(row, col)

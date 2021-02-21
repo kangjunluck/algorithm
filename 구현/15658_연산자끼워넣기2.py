@@ -1,31 +1,39 @@
-# 중복 순열.... ㅠㅠ 구현을
 import sys
 
 input = sys.stdin.readline
 
+def makeAnswer(i):  # i는 연산자리스트의 인덱스
+    global min_s, max_s
+    if i==n-1:
+        number = num[0]
+        for j in range(n-1):
+            if how[j]==0:
+                number += num[j+1]
+            elif how[j]==1:
+                number -= num[j+1]
+            elif how[j]==2:
+                number *= num[j+1]
+            else:
+                number /= num[j+1]
+                number = int(number)
+        min_s = min(min_s, number)
+        max_s = max(max_s, number)
+        return
+
+    for j in range(4):  # 0: +, 1: -, 2: *, 3:/
+        if way[j]:
+            way[j]-=1  # 연산자 한개 빼주고
+            how[i]=j 
+            makeAnswer(i+1)
+            way[j]+=1  # 빼준거 원상복귀
+
+
 n = int(input())
-numbers = list(map(int,input().split()))
-calcs = list(map(int,input().split()))
-cal = 1
-new_list = []  # 1은 +, 2는 -, 3은 *, 4는 /
-for calc in calcs:
-    for i in range(calc):
-        new_list.append(cal)
-    cal += 1
-
-m = len(new_list) # 연산자 갯수
-result = []
-
-for i in range(1<<m):
-    cnt = 0
-    ans = []
-    for j in range(m):
-        if i & (1<<j):
-            cnt +=1
-            ans.append(new_list[j])
-    if cnt == n-1:
-        if ans in result:
-            pass
-        else:
-            result.append(ans)
-real_result = []
+num = list(map(int, input().split()))
+way = list(map(int, input().split()))  # 덧셈, 뺄셈, 곱셈, 나눗셈
+how = [0 for _ in range(n-1)]
+min_s = 1000000000
+max_s = -1000000000
+makeAnswer(0)  # 인덱스 0부터 시작
+print(max_s)
+print(min_s)
