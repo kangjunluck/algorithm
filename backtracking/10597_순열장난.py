@@ -20,21 +20,20 @@ def find(idx, word=[]):
     if len(word) == N:
         result.append(' '.join(word))
         return
-    for i in range(idx, idx+2):
-        if (i == idx) and (i <= length-1):
-            a = data[i]
-            if int(a) > N or check[int(a)-1]: continue
+    if (idx <= length-1) and int(data[idx])>0 :
+        a = data[idx]
+        if int(a) <= N and check[int(a)-1] == 0: 
             check[int(a)-1] = 1    
             word.append(a)
-            find(i+1, word)
+            find(idx+1, word)
             word.pop()
             check[int(a)-1] = 0
-        elif (i == idx+1) and (i <= length-1):
-            a = data[i-1:i+1]
-            if int(a) > N or check[int(a)-1] : continue
+    if idx+1 <= length-1:
+        a = data[idx:idx+2]
+        if int(a) <= N and check[int(a)-1] ==0 :
             check[int(a)-1] = 1
             word.append(a)
-            find(i+1, word)
+            find(idx+2, word)
             word.pop()
             check[int(a)-1] = 0
     return
