@@ -29,6 +29,8 @@ def perm(idx):
 
 if n <= 10:
     print(n-1)
+elif n > 1023:
+    print(-1)
 else:
     cnt = 10
     i = 2
