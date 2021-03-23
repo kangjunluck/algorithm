@@ -19,6 +19,7 @@ while True:
         money, a, b = heapq.heappop(q)
         if a == n-1 and b == n-1:
             result = money
+            break
         for ar in range(4):
             nr = a + dr[ar]
             nc = b + dc[ar]
