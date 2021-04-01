@@ -2,8 +2,6 @@ import sys
 
 input = sys.stdin.readline
 
-
-
 def bellman(start):
     for o in range(n-1):
         for i in range(2*m+w):
