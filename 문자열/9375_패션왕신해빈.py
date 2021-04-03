@@ -15,5 +15,3 @@ for tc in range(1,T+1):
     for m in dic.values():
         ans *= m+1
     print(ans-1)
-
-    
