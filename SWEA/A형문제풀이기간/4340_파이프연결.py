@@ -39,8 +39,7 @@ for tc in range(1,T+1):
                                 dfs(nextA, b, 13, cnt+1)
                             else:
                                 dfs(nextA, b, 14, cnt+1)
-                            visited[nextA][b] = 0
-         
+                            visited[nextA][b] = 0       
         elif before == 12:
             if board[a][b] == 1 or board[a][b] == 2:
                 if 0<=b-1 and visited[a][b-1] == 0:
@@ -59,7 +58,6 @@ for tc in range(1,T+1):
                             else:
                                 dfs(nextA, b, 14, cnt+1)
                             visited[nextA][b] = 0
-
         elif before == 13:
             if board[a][b] == 1 or board[a][b] == 2:
                 if a+1 <= n-1 and visited[a+1][b] == 0:
