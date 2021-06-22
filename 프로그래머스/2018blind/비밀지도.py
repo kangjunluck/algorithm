@@ -27,3 +27,8 @@ def solution(n, arr1, arr2):
         answer.append(''.join(step))
     
     return answer
+
+# 비트 연산으로 풀면 쉽다
+# num = arr1 | arr2 으로 하여 1, 0을 서로 채울 수 있다.
+# xor의 경우 같으면 다르면 1, 같으면 0으로 된다.
+# 개념 숙지해 두자. 비트 연산!
