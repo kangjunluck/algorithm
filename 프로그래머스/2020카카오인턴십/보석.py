@@ -1,7 +1,7 @@
+# 이진탐색 풀이
 def solution(gems):
     answer = []
     species = set(gems)
-    # 이진 탐색 풀이
     n = len(gems)
     
     def check():
