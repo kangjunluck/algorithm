@@ -1,4 +1,4 @@
-# 이진탐색 풀이
+# 이진탐색 풀이dd
 def solution(gems):
     answer = []
     species = set(gems)
