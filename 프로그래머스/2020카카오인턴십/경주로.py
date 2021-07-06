@@ -31,8 +31,9 @@ def solution(board):
                 if way-i == 0: cost = 1
                 dfs(nextR, nextC, i, total+cost)
                 visited[nextR][nextC] = 0
-    visited = [[0]*n for _ in range(n)]
 
+    visited = [[0]*n for _ in range(n)]
+    visited[0][0] = 1
     dfs(0, 0, 0)
     dfs(0, 0, 1)
             
