@@ -5,8 +5,9 @@ def circulate(e):
     global Team
     visited[e] = 1
     check.append(e)
-    if visited[pick[e]] and pick[e] in check:
-        Team.update(check[check.index(pick[e]):])
+    if visited[pick[e]]:
+        if pick[e] in check:
+            Team.update(check[check.index(pick[e]):])
     else:
         circulate(pick[e])
     
