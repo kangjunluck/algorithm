@@ -9,12 +9,14 @@ def findans(idx, start):
     if idx == l-1:
         cnt += 1
         if cnt == n+1:
+            print(sel)
             answer = [str(i)] + sel[::-1]
             isEnd = True
         return
     for k in range(start, i):
         sel[idx] = str(num[k])
         findans(idx+1, k+1)
+
 # 자리수 l
 if n < 10:
     result = n
