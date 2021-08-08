@@ -21,7 +21,6 @@ while cnta < n:
                 if suma + sumb == t:
                     answer += 1
             cntb += 1
-
     cnta += 1 
 
 print(answer)

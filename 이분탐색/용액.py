@@ -18,4 +18,4 @@ while l<r:
     else:
         l += 1
 
-print(data[ansl], data[ansr])n = int(input())
+print(data[ansl], data[ansr])
