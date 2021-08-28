@@ -1,3 +1,7 @@
+import sys
+
+input = sys.stdin.readline
+
 total = 0
 trees = dict()
 while True:
@@ -12,4 +16,4 @@ while True:
 treesort = sorted(list(trees.keys()), key = lambda x:x)
 
 for i in treesort:
-    print("{} {}".format(i, round((trees[i]/total*100), 4)))
+    print("{} {:.4f}".format(i, trees[i]/total*100))

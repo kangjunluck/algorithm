@@ -31,16 +31,3 @@ def check(i, case, zero):
             else:
                 check(i+1, 0, 0)
                 check(i+1, 1, 0)
-
-
-        
-
-
-
-    else:
-        if i+1 < n and data[i+1] == '1':
-            check(i+1, 0)
-        else:
-            return
-
-
