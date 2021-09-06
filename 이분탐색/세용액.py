@@ -26,6 +26,7 @@ for i in range(n):
             result = abs(total + one)
         if total + one < 0: l += 1
         else: r -= 1
+        
 for i in range(3):
     if i == 2:
         print(answer[i])
