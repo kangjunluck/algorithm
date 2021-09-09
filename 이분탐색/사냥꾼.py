@@ -17,9 +17,12 @@ for ani in anis:
         mid = (l+r)//2
         if guns[mid] < ani[0]: l = mid + 1
         else: r = mid
+
     if abs(guns[mid] - ani[0]) + ani[1] <= k:
         cnt += 1
-    elif (abs(guns[mid+1] - ani[0]) + ani[1]) <= k:
+    elif (abs(guns[l] - ani[0]) + ani[1]) <= k:
+        cnt += 1
+    elif (abs(guns[r] - ani[0]) + ani[1]) <= k:
         cnt += 1
 
 print(cnt)
