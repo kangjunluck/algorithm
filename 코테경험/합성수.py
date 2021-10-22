@@ -8,7 +8,7 @@ isFind = False
 def solution(n):
     global answer
     if n%2:
-        l = n//2 + 1
+        l = n//2 + 1 
     else:
         l = n//2
     odd = [2*k + 1 for k in range(l)]

@@ -12,7 +12,7 @@ public class network {
 			this.w = w;
 		}
 		@Override
-		public int compareTo(data o) {
+		public int compareTo(data o) { 
 			return this.w-o.w;
 		}
 	}
