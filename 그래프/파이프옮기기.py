@@ -4,6 +4,8 @@ map = [list(map(int, input().split())) for _ in range(n)]
 route = [[(0, 1), (1, 1)], [(0, 1),(1, 1), (1, 0)], [(1, 1), (1, 0)]]
 answer = 0
 
+# visited = 3차 행렬로 dp하듯이 저장
+
 def dfs(a, b, c):
     global answer
     if a == n-1 and b == n-1:
